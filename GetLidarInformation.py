@@ -19,24 +19,25 @@ import time
 import ImageProcessing
 
 
-fields = ["X", "Y", "Z", "Intensity", "Ring", "Time"]
+def GetLidarInfo(directories: str, fileNames: str, robotName: str):
+    fields = ["X", "Y", "Z", "Intensity", "Ring", "Time"]
 
-csvFileName = "Lidar_Information.csv"
+    csvFileName = "Lidar_Information.csv"
 
-fileName = "upstairs_hallway_and_office_1_robot_10"
-directory = "/home/dominic/Downloads/Project/RosBags/"
-results = directory + fileName
-extension = ".bag"
-bag = rosbag.Bag(directory+fileName+extension)
+    fileName = fileNames
+    directory = directories
+    results = directory + fileName
+    extension = ".bag"
+    bag = rosbag.Bag(directory+fileName+extension)
 
 
-#export lidar information based on x, y, z, intensity, ring, and time to a csv file
-with open(csvFileName, 'w') as csvfile:
-    csvwriter = csv.writer(csvfile)
-    csvwriter.writerow(fields)
+    #export lidar information based on x, y, z, intensity, ring, and time to a csv file
+    with open(csvFileName, 'w') as csvfile:
+        csvwriter = csv.writer(csvfile)
+        csvwriter.writerow(fields)
 
-    for topic, msg, t in bag.read_messages(topics=['/sekhmet/lidar_points']):
-        cloud_points = list(point_cloud2.read_points(msg, skip_nans=True, field_names = ("x", "y", "z", 'intensity','ring','time')))
-        csvwriter.writerows(cloud_points)
+        for topic, msg, t in bag.read_messages(topics=[f'/{robotName}/lidar_points']):
+            cloud_points = list(point_cloud2.read_points(msg, skip_nans=True, field_names = ("x", "y", "z", 'intensity','ring','time')))
+            csvwriter.writerows(cloud_points)
         
         

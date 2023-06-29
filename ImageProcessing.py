@@ -42,7 +42,6 @@ def ConvertImageTo2DTensor():
             # Convert the image to PyTorch tensor
             twoDimensional = transform(openImage)
             twoDimensional2 = transformGrayscale(twoDimensional)
-            print(twoDimensional2.ndimension())
 
             #this made the 3d image into a 2D image
             #twoDimensional = twoDimensional.permute(0,2,1)#[:, -1, :]
@@ -60,8 +59,6 @@ def ConvertImageTo2DTensor():
             img = Image.fromarray(np.array([ x * 255 for x in scaleup]))
             if img.mode != 'RGB':
                 img = img.convert('RGB')
-                print(img)
             img.save(x, format='PNG')
             
 
-ConvertImageTo2DTensor()
