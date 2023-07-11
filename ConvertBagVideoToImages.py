@@ -18,16 +18,10 @@ import cv2
 import time
 import ImageProcessing
 
-def conversion(robotName: str, fileNames: str, directories: str):
+def conversion(robotName: str, fileNames: str, directories: str, bagFile):
     fields = ["X", "Y", "Z", "Intensity", "Ring", "Time"]
 
     csvFileName = "Lidar_Information.csv"
-
-    fileName = fileNames
-    directory = "/home/dominic/Downloads/Project/RosBags/"
-    results = directory + fileName
-    extension = ".bag"
-    bag = rosbag.Bag(directory+fileName+extension)
     saveImagePath = "/home/dominic/Downloads/Project/imgs"
     saveImageFileName = ""
     extenstion2 = ".png"
@@ -37,15 +31,14 @@ def conversion(robotName: str, fileNames: str, directories: str):
     with open(csvFileName, 'w') as csvfile:
         csvwriter = csv.writer(csvfile)
         csvwriter.writerow(fields)
-        for topic, msg, t in bag.read_messages(topics=[f'/{robotName}/camera/image_raw']):
+        for topic, msg, t in bagFile.read_messages(topics=[f'/{robotName}/camera/image_raw']):
             info = dir(msg)
-            img = message_to_cvimage(msg)
+            #img = message_to_cvimage(msg)
             img = message_to_cvimage(msg, 'bgr8')
-            new_im = im.fromarray(img)
+            #new_im = im.fromarray(img)
             new_im = np.asarray(img)
             timeStamp = time.time()
             saveImageFileName = str(timeStamp)
             cv2.imwrite(saveImageFileName + extenstion2, new_im)
             ImageProcessing.ImageConversion(saveImagePath+"/"+saveImageFileName+extenstion2, saveImageFileName+extenstion2)
-    bag.close()
     ImageProcessing.ConvertImageTo2DTensor()

@@ -1,8 +1,6 @@
 from haversine import haversine, Unit
 import utm
-import math
 import numpy as np
-import sys
 
 
 #Get the distance of two points in meters
@@ -43,8 +41,3 @@ def LatLonToUTM(latitude: float, longitude: float):
     print(loc)
     return loc
 
-print(round(DistanceBetweenTwoPoints(37.2279,77.4019,38.9907,77.0261)))
-UTMToLatLon(713094, 4122654, 43, 'S')
-ConvertToXYZ(-0.23391677292326765, 97.68132645835831)
-XYZToLongLat(-851.5611645575466, 6313.77922072286, -26.010286150422274)
-LatLonToUTM(37.2279, 77.4019)

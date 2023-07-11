@@ -5,7 +5,6 @@ import cv2
 import numpy as np
 import rosbag
 import os
-import glob
 
 rosBagList = []
 path = "/home/dominic/Downloads/Project/RosBags/upstairs_hallway_and_office2_2023-06-22-10-05-36.bag"
@@ -39,20 +38,8 @@ def GetRosBag(x):
     bag = rosbag.Bag(x)
     rosBagList.append(bag)
 
-def GetBagsFromDirectory():
-    directory = "/home/dominic/Downloads/Project/RosBags/"
+def GetBagsFromDirectory(directories: str, RosBagList: list):
+    directory = directories
     for file in os.listdir(directory):
         bag = rosbag.Bag(directory + file)
-        rosBagList.append(bag)
-
-if __name__ == '__main__':
-    #pixel2depth("sekmet")
-    #GetRosBag("/home/dominic/Downloads/Project/RosBags/2011_09_30_0018.bag")
-    #GetRosBag("/home/dominic/Downloads/Project/RosBags/upstairs_hallway_and_office2_2023-06-22-10-05-36.bag")
-    GetBagsFromDirectory()
-    print(rosBagList[1])
-    #this prints all the bags information in the RosBags directory
-    #count = 0
-    #for i in rosBagList:
-        #print(rosBagList[count])
-        #count = count + 1
+        RosBagList.append(bag)

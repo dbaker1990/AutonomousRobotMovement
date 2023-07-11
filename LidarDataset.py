@@ -8,6 +8,8 @@ from torch.utils.data import DataLoader
 from torchvision import datasets
 from torchvision.transforms import ToTensor
 
+
+"""
 class LidarDataset():
     def __init__(self, dataset, transforms, dataset_path, labels):
         self.dataset_path = "./dataset/"
@@ -35,3 +37,4 @@ class LidarDataset():
         if self.transforms:
             image = self.transforms(image)
         return (image, label)
+        """

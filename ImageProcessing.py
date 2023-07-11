@@ -9,15 +9,17 @@ import numpy as np
 import PIL
 from torchvision.utils import save_image
 from PIL import Image, ImageOps
+import math
+import matplotlib.pyplot as plt
 
 
 
 #convert to grayscale and 32 x 32 size
 def ImageConversion(image: str, filename):
     im1 = Image.open(image)
-    im2 = ImageOps.grayscale(im1)
-    newsize = (32,32)
-    im2 = im2.resize(newsize)
+    #im2 = ImageOps.grayscale(im1)
+    newsize = (128,128)
+    im2 = im1.resize(newsize)
     im2.save(filename)
     
 #convert to pytorch tensor and make it tensor grayscale
@@ -25,7 +27,7 @@ def ConvertImageTo2DTensor():
     # Define a transform to convert the image to tensor
     transform = transforms.ToTensor()
     transformGrayscale = transforms.Grayscale()
-    transformResize = transforms.Resize((32,32))
+    transformResize = transforms.Resize((128,128))
     PILtransform = transforms.ToPILImage()
     imagePath = "/home/dominic/Downloads/Project/imgs/"
     os.chdir(imagePath)
@@ -61,4 +63,3 @@ def ConvertImageTo2DTensor():
                 img = img.convert('RGB')
             img.save(x, format='PNG')
             
-
