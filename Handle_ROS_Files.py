@@ -7,7 +7,7 @@ import rosbag
 import os
 
 rosBagList = []
-path = "/home/dominic/Downloads/Project/RosBags/upstairs_hallway_and_office2_2023-06-22-10-05-36.bag"
+path = "/home/dominic/Downloads/Project/RosBags/2023-07-11-16-44-25.bag"
 
 #convert ROS image messages to OpenCV images
 def convert_depth_image(ros_image):

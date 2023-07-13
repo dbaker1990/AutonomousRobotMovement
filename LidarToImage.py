@@ -18,7 +18,7 @@ time = data['Time'].tolist()
 
 
 for index, (xi,yi,zi,timei) in enumerate(zip(x,y,z,time)):
-    if index == 50000: break
+    if index == 80000: break
     
     if zi <= 0.5 and timei == 0.0:
         x1.append(xi)
@@ -35,5 +35,5 @@ fig = plt.figure(figsize=(100,100))
 ax = plt.axes(projection="3d")
 
 
-ax.scatter3D(x_mask,y_mask,z_mask,c=z_mask, cmap = cm.twilight)
+ax.scatter3D(x_mask,y_mask,z_mask,c=z_mask, cmap = cm.inferno)
 plt.show()

@@ -6,6 +6,8 @@ data_path = Path("data/")
 image_path = Path("imgs/")
 dataset_path = Path("dataset/")
 rosbag_path = Path("RosBags/")
+intensityImgs = Path("imgs/intensity")
+depthImgs = Path("imgs/depth")
 
 #function to check if the neccessary folders is in project
 def CheckIfNecessaryDirectoryExists():
@@ -13,7 +15,16 @@ def CheckIfNecessaryDirectoryExists():
         if data_path.is_dir():
             if dataset_path.is_dir():
                 if rosbag_path.is_dir():
-                    return True
+                    if intensityImgs.is_dir():
+                        if depthImgs.is_dir():
+                            return True
+                        else:
+                            print("You're missing depth folder that is supposed to be in imgs folder!")
+                            return False
+                    else:
+                        print("You're missing intensity folder that is supposed to be in imgs folder!")
+                        return False
+
                 else:
                     print("You're missing RosBags folder!")
                     return False

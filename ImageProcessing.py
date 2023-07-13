@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 
 
 
-#convert to grayscale and 32 x 32 size
+#convert to grayscale and 128 x 128 size
 def ImageConversion(image: str, filename):
     im1 = Image.open(image)
     #im2 = ImageOps.grayscale(im1)
